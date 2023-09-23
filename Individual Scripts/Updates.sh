@@ -78,10 +78,10 @@ else
 fi
 
 sudo sed -i '/Prompt/c\Prompt=lts' /etc/update-manager/release-upgrades
-sudo sed -i '/APT::Periodic::Update-Package-Lists/c\APT::Periodic::Update-Package-Lists "1";' /etc/apt/apt.conf.d/*auto-upgrades /etc/apt/apt.conf.d/*Periodic
-sudo sed -i '/APT::Periodic::Download-Upgradeable-Packages/c\APT::Periodic::Download-Upgradeable-Packages "1";' /etc/apt/apt.conf.d/*auto-upgrades /etc/apt/apt.conf.d/*Periodic
-sudo sed -i '/APT::Periodic::AutocleanInterval/c\APT::Periodic::AutocleanInterval "14";' /etc/apt/apt.conf.d/*auto-upgrades /etc/apt/apt.conf.d/*Periodic
-sudo sed -i '/APT::Periodic::Unattended-Upgrade/c\APT::Periodic::Unattended-Upgrade "1";' /etc/apt/apt.conf.d/*auto-upgrades /etc/apt/apt.conf.d/*Periodic
+sudo sed -i '/APT::Periodic::Update-Package-Lists/c\APT::Periodic::Update-Package-Lists "1";' /etc/apt/apt.conf.d/*auto-upgrades /etc/apt/apt.conf.d/*periodic
+sudo sed -i '/APT::Periodic::Download-Upgradeable-Packages/c\APT::Periodic::Download-Upgradeable-Packages "1";' /etc/apt/apt.conf.d/*auto-upgrades /etc/apt/apt.conf.d/*periodic
+sudo sed -i '/APT::Periodic::AutocleanInterval/c\APT::Periodic::AutocleanInterval "14";' /etc/apt/apt.conf.d/*auto-upgrades /etc/apt/apt.conf.d/*periodic
+sudo sed -i '/APT::Periodic::Unattended-Upgrade/c\APT::Periodic::Unattended-Upgrade "1";' /etc/apt/apt.conf.d/*auto-upgrades /etc/apt/apt.conf.d/*periodic
 
 
 
