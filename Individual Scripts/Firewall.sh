@@ -2,6 +2,9 @@
 
 # Firewall
 
+#for allowing ports
+read -ap "List ports/programs to allow through fire wall, [port/program1 port/program2]" portPass
+
 if ! dpkg -l | grep -q 'ufw'; then
     echo "ufw was not found...installing"
     sudo apt install ufw -yq
@@ -18,7 +21,13 @@ sudo ufw logging on
 echo "allowing ports"
 # sudo ufw allow `echo $@ | sed 's/ /,/g'`
 # work on this on thursday
-echo "use sudo ufw allow <port> to allow a port, i'll add this later"
+#(Theo here, this might work)
+for (( i=0; i<${portPass[@]}; i++ ));
+do
+    sudo ufw allow ${portPass[i]}
+done
+
+#echo "use sudo ufw allow <port> to allow a port, i'll add this later"
 
 if ! grep -q ipv6.disable=1 /etc/default/grub; then
     echo "disabling ipv6"
