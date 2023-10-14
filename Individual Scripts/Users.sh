@@ -145,5 +145,3 @@
             echo "${AllCurrentUsers[i]}:Cyb3rPatr!0t$" | chpasswd
         fi
     done
-    Confirmation
-}
