@@ -27,38 +27,43 @@
 
     #enter Admins from README
     NeededUsers=($CurrentUser)
-    read -p "Please enter Current/Main cyberpat user: " MainUser
-    NeededUsers+=($MainUser)
+    # read -p "Please enter Current/Main cyberpat user: " MainUser
+    # NeededUsers+=($MainUser)
 
 
-    enteradmins() {
-        read -p "Please list all Admin Users, When done type[done.]: " adminanswer
-        if [ $adminanswer == "done." ]
-        then 
-            return 1
-        elif [ $adminanswer != $CurrentUser ]
-        then 
-            NeededUsers+=($adminanswer)
-            enteradmins
-        elif  [ $adminanswer == $CurrentUser ]
-        then
-            enteradmins
-        elif [ $adminanswer == $MainUser ]
-        then 
-            enteradmins
-        fi
-    }
-    enteradmins
-    enterStandard() {
-    read -p "Please list all Standard Users, When done type [done.]: " StandardAnswer
-    if [ $StandardAnswer != "done." ]
-    then 
-        NeededStandard+=($StandardAnswer)
-        enterStandard
-    fi
-    return 1
-    }
-    enterStandard
+    # enteradmins() {
+    #     read -p "Please list all Admin Users, When done type[done.]: " adminanswer
+    #     if [ $adminanswer == "done." ]
+    #     then 
+    #         return 1
+    #     elif [ $adminanswer != $CurrentUser ]
+    #     then 
+    #         NeededUsers+=($adminanswer)
+    #         enteradmins
+    #     elif  [ $adminanswer == $CurrentUser ]
+    #     then
+    #         enteradmins
+    #     elif [ $adminanswer == $MainUser ]
+    #     then 
+    #         enteradmins
+    #     fi
+    # }
+    # enteradmins
+    # enterStandard() {
+    # read -p "Please list all Standard Users, When done type [done.]: " StandardAnswer
+    # if [ $StandardAnswer != "done." ]
+    # then 
+    #     NeededStandard+=($StandardAnswer)
+    #     enterStandard
+    # fi
+    # return 1
+    # }
+    # enterStandard
+    read -p "input readme html path" path
+
+    mapfile -t StandardAnswer < <(sed -n '/Authorized Users:<\/b>/, /</{ /Authorized Users:<\/b>/! { /</! p } }' $path)
+    mapfile -t adminanswer < <(sed -n '/Authorized Administrators:/, /</{ /Authorized Administrators:/! { /</! p } }' $path | sed -n '1~2p' |cut -d" " -f1)
+
 
     #admin user differences
     mapfile -t AdminDiffs < <(echo ${CurrentAdminUsers[@]} ${NeededUsers[@]} | tr ' ' '\n' | sort | uniq -u)
