@@ -61,9 +61,10 @@
     # enterStandard
     read -p "input readme html path" path
 
-    mapfile -t NeededStandard < <(sed -n '/Authorized Users:<\/b>/, /</{ /Authorized Users:<\/b>/! { /</! p } }' $path)
-    mapfile -t NeededUsers < <(sed -n '/Authorized Administrators:/, /</{ /Authorized Administrators:/! { /</! p } }' $path | sed -n '1~2p' |cut -d" " -f1)
-
+    mapfile -t NeededStandard < <(sed -n '/Authorized Users:<\/b>/, /</{ /Authorized Users:<\/b>/! { /</! p } }' $path | xargs)
+    mapfile -t NeededUsers < <(sed -n '/Authorized Administrators:/, /</{ /Authorized Administrators:/! { /</! p } }' $path | sed -n '1~2p' |cut -d" " -f1 | xargs)
+    NeededUsers+=("root")
+    MainUser=${NeededStandard[0]}
 
     #admin user differences
     mapfile -t AdminDiffs < <(echo ${CurrentAdminUsers[@]} ${NeededUsers[@]} | tr ' ' '\n' | sort | uniq -u)
