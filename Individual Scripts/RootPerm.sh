@@ -13,5 +13,5 @@ else
 fi
 
 #shadow permissions
-sudo chmod 000 /etc/shadow
+sudo chmod 640 /etc/shadow
 echo "/etc/shadow permissions changed"
