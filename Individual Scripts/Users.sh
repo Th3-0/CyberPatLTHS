@@ -145,7 +145,7 @@
     #========================================================================================================================
     for (( i=0; i<${#AllCurrentUsers[@]}; i++ ));
     do
-        if [ ${AllCurrentUsers[i]} != $MainUser ]
+        if [[ ${AllCurrentUsers[i]} != $MainUser ]]
         then
             echo "changing password for ${AllCurrentUsers[i]}"
             echo "${AllCurrentUsers[i]}:Cyb3rPatr!0t$" | chpasswd
