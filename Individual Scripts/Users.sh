@@ -26,7 +26,6 @@
     CurrentAdminUsers+=("root")
 
     #enter Admins from README
-    NeededUsers=($CurrentUser)
     # read -p "Please enter Current/Main cyberpat user: " MainUser
     # NeededUsers+=($MainUser)
 
@@ -64,7 +63,7 @@
     mapfile -t NeededStandard < <(sed -n '/Authorized Users:<\/b>/, /</{ /Authorized Users:<\/b>/! { /</! p } }' $path | xargs)
     mapfile -t NeededUsers < <(sed -n '/Authorized Administrators:/, /</{ /Authorized Administrators:/! { /</! p } }' $path | sed -n '1~2p' |cut -d" " -f1 | xargs)
     NeededUsers+=("root")
-    MainUser=${NeededStandard[0]}
+    MainUser=${NeededUsers[0]}
 
     #admin user differences
     mapfile -t AdminDiffs < <(echo ${CurrentAdminUsers[@]} ${NeededUsers[@]} | tr ' ' '\n' | sort | uniq -u)
@@ -143,9 +142,9 @@
     #IT IS HORRIBLY INSECURE(cyberpatriots doesn't detect or care though). IT IS A STUPID FUCKING WORKAROUND FOR SPEED 
     #BASICALLY MAKES PASSWORD VIEWABLE BY ANYBODY WHO HAS ACCESS TO PS COMMAND.
     #========================================================================================================================
-    for (( i=0; i<${#AllCurrentUsers[@]}; i++ ));
+    for (( i=1; i<${#AllCurrentUsers[@]}; i++ ));
     do
-        if [[ ${AllCurrentUsers[i]} != $MainUser ]]
+        if [[ ${AllCurrentUsers[i]} != "root" ]]
         then
             echo "changing password for ${AllCurrentUsers[i]}"
             echo "${AllCurrentUsers[i]}:Cyb3rPatr!0t$" | chpasswd
