@@ -18,18 +18,11 @@ fi
 echo "turning on logging"
 sudo ufw logging on
 
-echo "allowing ports"
 # sudo ufw allow `echo $@ | sed 's/ /,/g'`
 # work on this on thursday
 #(Theo here, this might work)
 
 #echo "use sudo ufw allow <port> to allow a port, i'll add this later"
-
-if ! grep -q ipv6.disable=1 /etc/default/grub; then
-    echo "disabling ipv6"
-    sudo sed -i "s/GRUB_CMDLINE_LINUX_DEFAULT=\"[^ ]*/& ipv6.disable=1/" /etc/default/grub
-    sudo update-grub
-fi
 
 echo "updating sysctl config"
 

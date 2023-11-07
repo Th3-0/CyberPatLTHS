@@ -21,7 +21,7 @@ for file in "${fileTypes[@]}"; do
  	foundFiles=$(sudo find /home -name "*.$file" -type f)
  	if [ -n "$foundFiles" ]; then
 		echo "$foundFiles" >> media.log
-		fileCount=$((fileCount + $(echo "$foundFiles" | wc -l)))
+		fileCount=$((fileCount + $(echo "$foundFiles" | wc -l))
  	fi
 done
 

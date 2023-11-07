@@ -16,7 +16,7 @@ for (( i=0; i<${#debType[@]}; i++ ));
 do
     if grep -iq "${debType[i]} http://archive.canonical.com/ubuntu focal" /etc/apt/sources.list
     then
-        sudo sed -i "/${debType[i]} http:\/\/archive.canonical.com\/ubuntu focal/c\ ${debType[i]} http:\/\/archive.canonical.com\/ubuntu focal partner" /etc/apt/sources.list
+        sudo sed -i "/${debType[i]} http:\/\/archive.canonical.com\/ubuntu focal/c${debType[i]} http:\/\/archive.canonical.com\/ubuntu focal partner" /etc/apt/sources.list
     else
         echo "${debType[i]} http://archive.canonical.com/ubuntu focal partner" >> /etc/apt/sources.list
     fi

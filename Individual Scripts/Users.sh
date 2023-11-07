@@ -1,6 +1,6 @@
 #!/bin/bash
 
- echo "================================================================" 
+    echo "================================================================" 
     echo "                     PASSWORDS AND USERS                               "
     echo "     output for this is stored in separate UserChangeLog file"
     echo "================================================================"
@@ -25,43 +25,18 @@
     updateUserDefs
     CurrentAdminUsers+=("root")
 
-    #enter Admins from README
-    # read -p "Please enter Current/Main cyberpat user: " MainUser
-    # NeededUsers+=($MainUser)
-
-
-    # enteradmins() {
-    #     read -p "Please list all Admin Users, When done type[done.]: " adminanswer
-    #     if [ $adminanswer == "done." ]
-    #     then 
-    #         return 1
-    #     elif [ $adminanswer != $CurrentUser ]
-    #     then 
-    #         NeededUsers+=($adminanswer)
-    #         enteradmins
-    #     elif  [ $adminanswer == $CurrentUser ]
-    #     then
-    #         enteradmins
-    #     elif [ $adminanswer == $MainUser ]
-    #     then 
-    #         enteradmins
-    #     fi
-    # }
-    # enteradmins
-    # enterStandard() {
-    # read -p "Please list all Standard Users, When done type [done.]: " StandardAnswer
-    # if [ $StandardAnswer != "done." ]
-    # then 
-    #     NeededStandard+=($StandardAnswer)
-    #     enterStandard
-    # fi
-    # return 1
-    # }
-    # enterStandard
     read -p "Readme Path: " path
 
     mapfile -t NeededStandard < <(sed -n '/Authorized Users:<\/b>/, /</{ /Authorized Users:<\/b>/! { /</! p } }' $path | xargs)
     mapfile -t NeededUsers < <(sed -n '/Authorized Administrators:/, /</{ /Authorized Administrators:/! { /</! p } }' $path | sed -n '1~2p' |cut -d" " -f1 | xargs)
+    if (( ${#NeededStandard[@]} == 0 )); 
+    then
+        echo "STANDARD USERS NOT DEFINED"
+    fi
+    if (( ${#NeededUsers[@]} == 0 )); 
+    then
+        echo "ADMINS NOT DEFINED"
+    fi
     NeededUsers+=("root")
     MainUser=${NeededUsers[0]}
 
