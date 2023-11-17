@@ -10,6 +10,11 @@ echo "========================================"
 echo "      SCRIPT MUST BE RAN AS ROOT"
 echo "========================================"
 
+echo "========================================"
+echo "Download readme html and make name short
+echo "========================================"
+read -p "Readme Path: " path
+
 Users() {
     echo "================================================================" 
     echo "                     PASSWORDS AND USERS                               "
@@ -35,8 +40,6 @@ Users() {
     }
     updateUserDefs
     CurrentAdminUsers+=("root")
-
-    read -p "Readme Path: " path
 
     mapfile -t NeededStandard < <(sed -n '/Authorized Users:<\/b>/, /</{ /Authorized Users:<\/b>/! { /</! p } }' $path | xargs)
     mapfile -t NeededUsers < <(sed -n '/Authorized Administrators:/, /</{ /Authorized Administrators:/! { /</! p } }' $path | sed -n '1~2p' |cut -d" " -f1 | xargs)
@@ -399,7 +402,6 @@ SysctlConfig() {
 }
 
 SecureSSH() {
-    sudo apt-get install openssh-server
     # Backup the SSH configuration
     sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.backup
     echo "SSH config backed up to: /etc/ssh/sshd_config.backup"
@@ -426,7 +428,7 @@ DisableRoot
 Sudoers
 shadow
 #DEBUpdates
-MediaScan
 Firewall
 SysctlConfig
 SecureSSH
+MediaScan
