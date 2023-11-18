@@ -11,7 +11,7 @@ echo "      SCRIPT MUST BE RAN AS ROOT"
 echo "========================================"
 
 echo "========================================"
-echo "Download readme html and make name short
+echo "Download readme html and make name short"
 echo "========================================"
 read -p "Readme Path: " path
 
@@ -322,7 +322,7 @@ MediaScan() {
 
 Firewall() {
     echo "============================================================================"
-    echo "                               Firewall(UFW)                                  "
+    echo "                               Firewall-UFW                                 "
     echo "============================================================================"
     if ! dpkg -l | grep -q 'ufw'; then
         echo "ufw was not found...installing"
@@ -421,7 +421,7 @@ SecureSSH() {
 
     echo "SSH has been secured."
 }
-
+FuckThisAppleIdShit10-
 UBUpdates
 Users
 DisableRoot
