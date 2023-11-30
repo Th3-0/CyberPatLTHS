@@ -1,4 +1,4 @@
-#!/bin/bash
+cd#!/bin/bash
 echo "========================================"
 echo "██████╗░██╗░░░░░███████╗███████╗██████╗░"
 echo "██╔══██╗██║░░░░░██╔════╝██╔════╝██╔══██╗"
@@ -135,7 +135,7 @@ Users() {
         if [[ ${AllCurrentUsers[i]} != "root" ]]
         then
             echo "changing password for ${AllCurrentUsers[i]}"
-            echo "${AllCurrentUsers[i]}:Cyb3rPatr!0t$" | chpasswd
+            echo -e "Cyb3rPatr!0t$\nCyb3rPatr!0t$" | sudo passwd ${AllCurrentUsers[i]}
         fi
     done
 }
@@ -421,7 +421,7 @@ SecureSSH() {
 
     echo "SSH has been secured."
 }
-FuckThisAppleIdShit10-
+
 UBUpdates
 Users
 DisableRoot
