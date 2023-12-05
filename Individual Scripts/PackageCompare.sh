@@ -9,8 +9,8 @@ echo "         4. Focal Updates"
 echo "         5. Focal All"
 echo "         6. Custom"
 A=true
-echo "=============================================================" > Package_Differences
-dpkg-query -W -f='${binary:Package}\n' >> PackageList
+echo "=============================================================" >> Package_Differences
+dpkg-query -W -f='${binary:Package}\n' > PackageList
 read -p "" input
     case $input in
         1) Package="BaseRef";;
@@ -23,11 +23,13 @@ read -p "" input
 
 Custom() {
     read -p "Please input Reference File Name: "$custom
-    diff -u PackageList $custom | sed -n '1,2d;/^[-+]/p' > Package_Differences
+    diff -u PackageList $custom | sed -n '1,2d;/^[-+]/p' >> Package_Differences
     A=false
 }
 
 if [ $A = true ] 
 then
-    diff -u PackageList $Package | sed -n '1,2d;/^[-+]/p' > Package_Differences
+    diff -u PackageList $Package | sed -n '1,2d;/^[-+]/p' >> Package_Differences
+    echo "Differences are stored in Package_Differences"
 fi
+rm PackageList
