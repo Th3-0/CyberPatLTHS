@@ -13,16 +13,16 @@ fileTypes=(
 	"mp3" "ogg" "m4a" "flac"
 	# Misc
 	"txt" "docx" "pdf" "doc" "ppt" "pptx" "xls" "ps"
-) 
+)
 
 fileCount=0
 echo "Scanning..."
 for file in "${fileTypes[@]}"; do
- 	foundFiles=$(sudo find /home -name "*.$file" -type f)
- 	if [ -n "$foundFiles" ]; then
-		echo "$foundFiles" >> media.log
-		fileCount=$((fileCount + $(echo "$foundFiles" | wc -l))
- 	fi
+	foundFiles=$(sudo find /home -name "*.$file" -type f)
+	if [ -n "$foundFiles" ]; then
+		echo "$foundFiles" >>media.log
+		fileCount=$((fileCount + 1))
+	fi
 done
 
 echo "Media scan complete $fileCount files found."
